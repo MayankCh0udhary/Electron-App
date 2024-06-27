@@ -1,5 +1,6 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
+const pool = require('./db'); 
 
 function createWindow () {
   const mainWindow = new BrowserWindow({
@@ -26,3 +27,13 @@ app.on('activate', () => {
     createWindow();
   }
 });
+
+// Example query to test the connection
+pool.query('SELECT * FROM Persons', (error, results) =>{
+  if(error) {
+    console.error('Error is here=>', error);
+  }
+  else{
+    console.log('result=> ', results);
+  }
+})
